@@ -1,13 +1,23 @@
+"use client"
+
+
 import BlogCard from '@/components/ui/BlogCard';
+import { useGetBlogsQuery } from '@/redux/api/baseApi';
 import { BlogPost } from '@/types';
 import React from 'react';
 
-const BlogsPage = async() => {
+const BlogsPage = () => {
 
-    const res = await fetch('http://localhost:5000/blogs',{
-        cache:'no-store'
-    });
-    const blogs = await res.json();
+    // const res = await fetch('http://localhost:5000/blogs',{
+    //     cache:'no-store'
+    // });
+    // const blogs = await res.json();
+
+
+    const {data:blogs,isLoading,isError,error} = useGetBlogsQuery('')
+   if(isLoading){
+    return <p>Loading....</p>
+   }
     return (
         <div className='w-[90%] mx-auto my-10'>
             <h1 className='text-4xl text-center my-5'>All Blogs from <span className='text-accent'>Blogiz</span></h1>
